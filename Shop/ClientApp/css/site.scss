@@ -83,6 +83,101 @@
     }
 }
 
+.bag {
+    background-image: url(images/bag.png);
+    position: fixed;
+    top: 0;
+    right: 0px;
+    width: 65px;
+    height: 65px;
+    background-color: #1b1a20;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    z-index: 998;
+
+    .item-count {
+        background-color: #eabf00;
+        border-radius: 50%;
+        height: 18px;
+        width: 18px;
+        line-height: 18px;
+        font-size: 1rem;
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        color: #000;
+    }
+}
+
+.bag-list {
+    position: fixed;
+    right: -450px;
+    height: 100%;
+    background-color: #1b1a20;
+    width: 450px;
+    z-index: 999;
+    top: 0px;
+    color: #fff;
+    transition: right .6s;
+
+    &.active {
+        right: 0px;
+    }
+
+    .close {
+        position: absolute;
+        height: 18px;
+        width: 18px;
+        color: #fff;
+        top: 0px;
+        left: 0px;
+        padding: 20px;
+    }
+
+    .head {
+        padding: 25px 0;
+        text-align: center;
+
+        .icon {
+            background-image: url(images/bag.png);
+            width: 65px;
+            height: 65px;
+            background-color: #1b1a20;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            position: relative;
+
+            .item-count {
+                background-color: #eabf00;
+                border-radius: 50%;
+                height: 18px;
+                width: 18px;
+                line-height: 18px;
+                font-size: 1rem;
+                display: inline-block;
+                text-align: center;
+                font-weight: bold;
+                position: absolute;
+                bottom: 5px;
+                right: 10px;
+                color: #000;
+            }
+        }
+
+        .title {
+            vertical-align: middle;
+            font-size: 2rem;
+        }
+    }
+}
+
 
 @media (min-width: 480px) {
     .products {

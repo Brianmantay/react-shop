@@ -6,15 +6,19 @@ import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 import * as RoutesModule from './routes';
 let routes = RoutesModule.routes;
+import { Provider } from 'mobx-react';
+import cartStore from './stores/store'
 
 function renderApp() {
     // This code starts up the React app when it runs in a browser. It sets up the routing
     // configuration and injects the app into a DOM element.
     const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href')!;
     ReactDOM.render(
-        <AppContainer>
-            <BrowserRouter children={ routes } basename={ baseUrl } />
-        </AppContainer>,
+        <Provider cartStore={cartStore}>
+            <AppContainer>
+                <BrowserRouter children={ routes } basename={ baseUrl } />
+            </AppContainer>
+        </Provider>,
         document.getElementById('react-app')
     );
 }

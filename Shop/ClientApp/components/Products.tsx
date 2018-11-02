@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { ProductsService, Product } from '../services/products-service';
+import { CartStore } from "../stores/store";
+import { observer, inject } from "mobx-react";
 
 export const Products: React.SFC<{}> = (props) => {
     const productService = new ProductsService();
@@ -14,7 +16,11 @@ export const Products: React.SFC<{}> = (props) => {
 
 interface ProductItemProps {
     product: Product;
+    cartStore?: CartStore;
 }
+
+@inject('cartStore')
+@observer
 export class ProductItem extends React.Component<ProductItemProps, {}> {
 
     constructor() {
@@ -44,6 +50,7 @@ export class ProductItem extends React.Component<ProductItemProps, {}> {
     }
 
     handleAddToCart() {
-        alert(this.props.product.name);
+        this.props.cartStore!.addToCart(this.props.product);
+        this.props.cartStore!.setCartActive(true);
     }
 }
