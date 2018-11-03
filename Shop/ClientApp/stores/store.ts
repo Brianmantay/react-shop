@@ -10,14 +10,25 @@ import { Product } from "../services/products-service";
         this.products.push(product);
     }
 
+    @action
+    setCartActive(active: boolean) {
+        this.cartActive = active;
+    }
+
+    @action
+    removeProduct(product: Product) {
+        this.products = this.products.filter(p => p.name != product.name);
+    }
+
     @computed
     get cartSize(): number {
         return this.products.length;
     }
 
-    @action
-    setCartActive(active: boolean) {
-        this.cartActive = active;
+    @computed
+    get cartTotal(): number {
+        return this.products.map(p => p.cost)
+            .reduce((prev, cur) => prev + cur, 0);
     }
 
 }
