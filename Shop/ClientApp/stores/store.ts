@@ -18,6 +18,8 @@ import { Product } from "../services/products-service";
     @action
     removeProduct(product: Product) {
         this.products = this.products.filter(p => p.name != product.name);
+        if (!this.products.length)
+            this.cartActive = false;
     }
 
     @computed

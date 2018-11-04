@@ -44,7 +44,7 @@ export class ProductItem extends React.Component<ProductItemProps, {}> {
                 </div>
                 <button type="button" className="btn btn-dark" onClick={this.handleAddToCart}>
                     Add to cart
-            </button>
+                </button>
             </div>
         )
     }

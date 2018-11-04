@@ -41,6 +41,9 @@ export class BagList extends React.Component<BagProps, {}> {
                 <div className="cost">
                     $ {this.store!.cartTotal.toFixed(2)}
                 </div>
+                <button type="button" className="btn btn-dark checkout" onClick={() => { alert('test'); }}>
+                    Checkout
+                </button>
             </div>
         </div>
     }
