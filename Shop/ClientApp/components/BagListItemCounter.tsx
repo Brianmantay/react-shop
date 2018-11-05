@@ -13,7 +13,6 @@ interface BagListItemCounterProps {
 @observer
 export class BagListItemCounter extends React.Component<BagListItemCounterProps, {}> {
 
-    @observable quantity: number = 1;
     store?: CartStore;
 
     constructor(props: BagListItemCounterProps) {
@@ -25,6 +24,7 @@ export class BagListItemCounter extends React.Component<BagListItemCounterProps,
     }
 
     render() {
+        const { cartItem } = this.props
         return <div className="item-counter">
             <div className="input-group">
                 <span className="input-group-btn">
@@ -32,7 +32,7 @@ export class BagListItemCounter extends React.Component<BagListItemCounterProps,
                         <span className="glyphicon glyphicon-minus"></span>
                     </button>
                 </span>
-                <input type="text" className="form-control input-number" value={this.quantity} onChange={this.handleChange} />
+                <input type="text" className="form-control input-number" value={cartItem.quantity} onChange={this.handleChange} />
                 <span className="input-group-btn">
                     <button type="button" className="btn btn-default btn-number" onClick={this.handleInc}>
                         <span className="glyphicon glyphicon-plus"></span>
@@ -43,17 +43,14 @@ export class BagListItemCounter extends React.Component<BagListItemCounterProps,
     }
 
     handleInc() {
-        this.quantity += 1;
-        this.store!.setProductQuantity(this.props.cartItem.product, this.quantity);
+        this.store!.incProductQuantity(this.props.cartItem);
     }
 
     handleDec() {
-        this.quantity -= 1;
-        this.store!.setProductQuantity(this.props.cartItem.product, this.quantity);
+        this.store!.decProductQuantity(this.props.cartItem);
     }
 
     handleChange(e: React.FormEvent<HTMLInputElement>) {
-        this.quantity = parseInt(e.currentTarget.value);
-        this.store!.setProductQuantity(this.props.cartItem.product, this.quantity);
+        this.store!.setProductQuantity(this.props.cartItem.product, parseInt(e.currentTarget.value));
     }
 }

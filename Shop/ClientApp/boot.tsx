@@ -8,6 +8,7 @@ import * as RoutesModule from './routes';
 let routes = RoutesModule.routes;
 import { Provider } from 'mobx-react';
 import cartStore from './stores/store'
+import { configure } from 'mobx';
 
 function renderApp() {
     // This code starts up the React app when it runs in a browser. It sets up the routing
@@ -22,6 +23,10 @@ function renderApp() {
         document.getElementById('react-app')
     );
 }
+
+configure({
+    enforceActions: "always"
+});
 
 renderApp();
 

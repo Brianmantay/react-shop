@@ -7,7 +7,15 @@ import { IProduct, CartItem } from "../services/products-service";
     
     @action
     addToCart(product: IProduct) {
-        this.cartItems.push(new CartItem(product, 1));
+        if (this.cartItems.some(p => p.product.name === product.name)) {
+            this.cartItems = this.cartItems.map(p => p.product.name === product.name
+                ? new CartItem(p.product, p.quantity += 1)
+                : p
+            );
+        }
+        else {
+            this.cartItems.push(new CartItem(product, 1));
+        }
     }
 
     @action
@@ -30,6 +38,22 @@ import { IProduct, CartItem } from "../services/products-service";
         }
         this.cartItems = this.cartItems.map(p => p.product.name === product.name
             ? new CartItem(p.product, quantity)
+            : p
+        );
+    }
+
+    @action
+    incProductQuantity(cartItem: CartItem) {
+        this.cartItems = this.cartItems.map(p => p.product.name === cartItem.product.name
+            ? new CartItem(p.product, cartItem.quantity + 1)
+            : p
+        );
+    }
+
+    @action
+    decProductQuantity(cartItem: CartItem) {
+        this.cartItems = this.cartItems.map(p => p.product.name === cartItem.product.name
+            ? new CartItem(p.product, cartItem.quantity - 1)
             : p
         );
     }
