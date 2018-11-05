@@ -1,11 +1,12 @@
 ﻿import * as React from 'react';
 import { CartStore } from "../stores/store";
 import { observer, inject } from 'mobx-react';
-import { Product } from "../services/products-service";
+import { IProduct, CartItem } from "../services/products-service";
+import { BagListItemCounter } from "./BagListItemCounter";
 
 interface BagListItemProps {
     cartStore?: CartStore;
-    product: Product;
+    cartItem: CartItem;
 }
 
 @inject('cartStore')
@@ -18,7 +19,8 @@ export class BagListItem extends React.Component<BagListItemProps, {}> {
     }
 
     render() {
-        const { product } = this.props;
+        const { product } = this.props.cartItem;
+        const { cartItem } = this.props;
         return <div className="bagged-item">
             <div className="picture">
                 <img src={product.imageUrl} />
@@ -28,14 +30,15 @@ export class BagListItem extends React.Component<BagListItemProps, {}> {
                 <p className="description">{product.description}</p>
             </div>
             <div className="item-price">
-                $ {product.cost.toFixed(2)}
+                $ {cartItem.total.toFixed(2)}
+                <BagListItemCounter cartItem={cartItem} />
             </div>
             <div className="remove-item" onClick={this.handleRemoveItem}>X</div>
         </div>
     }
 
     handleRemoveItem() {
-        const { cartStore, product } = this.props;
-        cartStore!.removeProduct(product);
+        const { cartStore, cartItem } = this.props;
+        cartStore!.removeProduct(cartItem.product);
     }
 } 

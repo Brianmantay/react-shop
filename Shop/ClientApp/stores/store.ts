@@ -1,13 +1,13 @@
 ﻿import { observable, action, computed } from 'mobx';
-import { Product } from "../services/products-service";
+import { IProduct, CartItem } from "../services/products-service";
 
  export class CartStore {
-     @observable products: Product[] = [];
-     @observable cartActive: boolean = false;
+    @observable cartItems: CartItem[] = [];
+    @observable cartActive: boolean = false;
     
     @action
-    addToCart(product: Product) {
-        this.products.push(product);
+    addToCart(product: IProduct) {
+        this.cartItems.push(new CartItem(product, 1));
     }
 
     @action
@@ -16,23 +16,34 @@ import { Product } from "../services/products-service";
     }
 
     @action
-    removeProduct(product: Product) {
-        this.products = this.products.filter(p => p.name != product.name);
-        if (!this.products.length)
+    removeProduct(product: IProduct) {
+        this.cartItems = this.cartItems.filter(p => p.product.name != product.name);
+        if (!this.cartItems.length)
             this.cartActive = false;
+    }
+
+    @action
+    setProductQuantity(product: IProduct, quantity: number) {
+        if (quantity <= 0) {
+            this.removeProduct(product);
+            return;
+        }
+        this.cartItems = this.cartItems.map(p => p.product.name === product.name
+            ? new CartItem(p.product, quantity)
+            : p
+        );
     }
 
     @computed
     get cartSize(): number {
-        return this.products.length;
+        return this.cartItems.reduce((prev, cur) => prev + cur.quantity, 0);
     }
 
     @computed
     get cartTotal(): number {
-        return this.products.map(p => p.cost)
+        return this.cartItems.map(p => p.product.cost * p.quantity)
             .reduce((prev, cur) => prev + cur, 0);
     }
-
 }
 const cartStore = new CartStore();
 export default cartStore;

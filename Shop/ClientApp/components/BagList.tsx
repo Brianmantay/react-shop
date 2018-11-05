@@ -29,8 +29,8 @@ export class BagList extends React.Component<BagProps, {}> {
             </div>
             <div className="bagged-items">
                 {
-                    this.store!.products.map(p => {
-                        return <BagListItem product={p} key={p.name}/>
+                    this.store!.cartItems.map(p => {
+                        return <BagListItem cartItem={p} key={p.product.name}/>
                     })
                 }
             </div>

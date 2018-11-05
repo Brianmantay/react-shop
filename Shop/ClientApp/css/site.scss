@@ -190,18 +190,19 @@
         .bagged-item {
             padding: 20px;
 
-            div {
-                display: inline-block;
+            .picture {
                 width: 25%;
-            }
+                display: inline-block;
 
-            .picture img {
-                height: 100px;
+                img {
+                    height: 100px;
+                }
             }
 
             .name-description {
                 width: 45%;
                 padding-left: 10px;
+                display: inline-block;
 
                 p.name {
                     font-size: 1.75rem;
@@ -217,6 +218,7 @@
                 color: #eabf00;
                 text-align: right;
                 font-size: 1.75rem;
+                display: inline-block;
             }
 
             .remove-item {
@@ -225,6 +227,7 @@
                 color: #fff;
                 font-weight: bold;
                 cursor: pointer;
+                display: inline-block;
             }
         }
     }
@@ -233,16 +236,17 @@
         padding: 20px;
 
         div {
-            display: inline-block;
             width: 50%;
         }
 
         .sub {
+            display: inline-block;
             text-transform: uppercase;
             color: #808080;
         }
 
         .cost {
+            display: inline-block;
             text-align: right;
             color: #eabf00;
             font-size: 2rem;
@@ -257,6 +261,33 @@
 
         &:hover {
             background-color: #eabf00;
+        }
+    }
+
+
+    div.item-counter {
+        width: 100%;
+        padding-top: 10px;
+
+        span, button, input {
+            display: inline-block;
+        }
+
+        .form-control {
+            width: 30px;
+            height: 24px;
+            padding: 2px;
+            border-radius: 0px;
+            text-align: center;
+        }
+
+        .input-group-btn {
+            width: unset;
+            display: table-cell;
+        }
+
+        .btn {
+            padding: 1px 8px;
         }
     }
 }

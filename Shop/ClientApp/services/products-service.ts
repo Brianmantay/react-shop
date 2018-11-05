@@ -1,6 +1,6 @@
 
 export class ProductsService {
-    public getProducts(): Product[] {
+    public getProducts(): IProduct[] {
         return [
             {
                 name: "Blue t-shirt",
@@ -30,9 +30,27 @@ export class ProductsService {
     }
 }
 
-export interface Product {
+export interface IProduct {
     name: string;
     imageUrl: string;
     cost: number;
     description: string;
+}
+
+export interface ICartItem {
+    product: IProduct;
+    quantity: number;
+    total: number;
+}
+
+export class CartItem implements ICartItem {
+    constructor(product: IProduct, quantity: number) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+    product: IProduct = {} as IProduct;
+    quantity: number = 1;
+    get total(): number {
+        return this.product.cost * this.quantity;
+    }
 }
