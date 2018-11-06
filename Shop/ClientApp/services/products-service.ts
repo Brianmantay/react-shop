@@ -17,6 +17,7 @@ export interface IProduct {
     imageUrl: string;
     cost: number;
     description: string;
+    size: string[];
 }
 
 export interface ICartItem {

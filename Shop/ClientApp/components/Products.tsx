@@ -22,7 +22,11 @@ export class Products extends React.Component<ProductProps, {}> {
     }
 
     render() {
-        return <div className="products"> {
+    return <div className="products">
+        {
+            this.productsStore!.loading && <div className="loader"></div>
+        }
+        {
             this.productsStore!.products.map(p => {
                 return <ProductItem product={p} key={p.name} />
             })
