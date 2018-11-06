@@ -1,17 +1,34 @@
 import * as React from 'react';
 import { ProductsService, IProduct } from '../services/products-service';
-import { CartStore } from "../stores/store";
+import { CartStore } from "../stores/cart-store";
 import { observer, inject } from "mobx-react";
+import { ProductsStore } from "../stores/products-store";
 
-export const Products: React.SFC<{}> = (props) => {
-    const productService = new ProductsService();
-    const products = productService.getProducts();
-    return <div className="products"> {
-        products.map(p => {
-            return <ProductItem product={p} key={p.name} />
-        })    
+interface ProductProps {
+    productsStore?: ProductsStore;
+}
+
+@inject('productsStore')
+@observer
+export class Products extends React.Component<ProductProps, {}> {
+    private productsStore?: ProductsStore;
+    constructor(props: ProductProps) {
+        super(props);
+        this.productsStore = this.props.productsStore;
     }
-    </div>
+
+    async componentDidMount() {
+        await this.productsStore!.getProducts();
+    }
+
+    render() {
+        return <div className="products"> {
+            this.productsStore!.products.map(p => {
+                return <ProductItem product={p} key={p.name} />
+            })
+        }
+        </div>
+    }
 }
 
 interface ProductItemProps {

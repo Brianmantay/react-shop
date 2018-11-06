@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { CartStore } from "../stores/store";
+import { CartStore } from "../stores/cart-store";
 import { observer, inject } from 'mobx-react';
 
 interface BagProps {
