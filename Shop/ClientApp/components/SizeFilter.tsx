@@ -45,8 +45,8 @@ export class SizeFilterOption extends React.Component<ISizeFilterOptionProps, {}
             onClick={() => this.handleSizeSelection(option)}> {option} </span>
     }
 
-    handleSizeSelection(option: string) {
+    async handleSizeSelection(option: string) {
         const { productsStore } = this.props;
-        productsStore!.toggleSizeFilter(option);
+        await productsStore!.toggleSizeFilter(option);
     }
 };

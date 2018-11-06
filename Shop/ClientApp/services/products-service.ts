@@ -10,6 +10,23 @@ export class ProductsService {
             throw Error(error);
         }
     }
+
+    public async getProductsBySize(sizeFilters: string[]): Promise<IProduct[]> {
+        try {
+            const response = await fetch(`http://localhost:62699/api/products`, {
+                method: 'post',
+                body: JSON.stringify({ sizeFilters }),
+                headers: [
+                    ["Content-Type", "application/json"],
+                ]
+            });
+            if (!response.ok)
+                throw Error(response.statusText);
+            return await response.json() as IProduct[];
+        } catch (error) {
+            throw Error(error);
+        }
+    }
 }
 
 export interface IProduct {

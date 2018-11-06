@@ -15,5 +15,16 @@ namespace Shop.Controllers
         {
             return Data.Products;
         }
+
+        [HttpPost]
+        public Product[] Post([FromBody] ProductsFilter filter)
+        {
+            return Data.Products.Where(p => filter.SizeFilters.Contains(p.Size)).ToArray();
+        }
+    }
+
+    public class ProductsFilter
+    {
+        public List<string> SizeFilters { get; set; }
     }
 }

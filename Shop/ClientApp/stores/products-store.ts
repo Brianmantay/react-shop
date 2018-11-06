@@ -12,7 +12,9 @@ export class ProductsStore {
     @action
     async getProducts() {
         this.loading = true;
-        const products = await this.productsApi.getProducts();
+        const products = (!this.sizeFilters.length)
+            ? await this.productsApi.getProducts()
+            : await this.productsApi.getProductsBySize(this.sizeFilters)
         runInAction(() => {
             this.products = products;
             this.loading = false;
@@ -25,13 +27,14 @@ export class ProductsStore {
     }
 
     @action
-    toggleSizeFilter(size: string) {
+    async toggleSizeFilter(size: string) {
         if (!this.hasSizeFilter(size)) {
             this.sizeFilters.push(size);
         }
         else {
             this.sizeFilters = this.sizeFilters.filter(s => s !== size);
         }
+        await this.getProducts();
     }
 
     hasSizeFilter(size: string): boolean {
