@@ -9,14 +9,13 @@ export interface ISizeFilterProps {
 @inject('productsStore')
 @observer
 export class SizeFilter extends React.Component<ISizeFilterProps, {}> {
-
-    private readonly sizes: string[] = ['XS', 'S', 'M', 'L', 'XL'];
-
+    
     render() {
+        const { productsStore } = this.props;
         return <div className="size-filter">
             <h4>Sizes:</h4>
             {
-                this.sizes.map(s => (<SizeFilterOption option={s} key={s} />))
+                productsStore!.sizes.map(s => (<SizeFilterOption option={s} key={s} />))
             }
         </div>
     }

@@ -11,22 +11,32 @@ export class ProductsService {
         }
     }
 
-    public async getProductsBySize(sizeFilters: string[]): Promise<IProduct[]> {
+    public async getProductsBySize(sizeFilters: string[], page: number): Promise<IProductsPaged> {
         try {
             const response = await fetch(`http://localhost:62699/api/products`, {
                 method: 'post',
-                body: JSON.stringify({ sizeFilters }),
+                body: JSON.stringify({
+                    page,
+                    sizeFilters,
+                    pageSize: 3
+                }),
                 headers: [
                     ["Content-Type", "application/json"],
                 ]
             });
             if (!response.ok)
                 throw Error(response.statusText);
-            return await response.json() as IProduct[];
+            return await response.json() as IProductsPaged;
         } catch (error) {
             throw Error(error);
         }
     }
+}
+
+export interface IProductsPaged
+{
+    products: IProduct[]
+    total: number;
 }
 
 export interface IProduct {

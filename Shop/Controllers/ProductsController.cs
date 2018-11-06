@@ -17,14 +17,29 @@ namespace Shop.Controllers
         }
 
         [HttpPost]
-        public Product[] Post([FromBody] ProductsFilter filter)
+        public ProductsPaged Post([FromBody] ProductsFilter filter)
         {
-            return Data.Products.Where(p => filter.SizeFilters.Contains(p.Size)).ToArray();
+            return new ProductsPaged
+            {
+                Products = Data.Products.Where(p => filter.SizeFilters.Contains(p.Size))
+                    .Skip((filter.Page - 1) * filter.PageSize)
+                    .Take(filter.PageSize)
+                    .ToArray(),
+                Total = Data.Products.Count()
+            };
         }
+    }
+
+    public class ProductsPaged
+    {
+        public Product[] Products { get; set; }
+        public int Total { get; set; }
     }
 
     public class ProductsFilter
     {
         public List<string> SizeFilters { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
     }
 }

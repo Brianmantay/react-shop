@@ -5,18 +5,24 @@ export class ProductsStore {
     @observable products: IProduct[] = [];
     @observable loading: boolean = false;
     @observable sizeFilters: string[] = [];
+    @observable sizes: string[] = ['XS', 'S', 'M', 'L', 'XL'];
+    @observable totalRecords: number = 0;
 
     constructor(private productsApi: ProductsService) {
     }
 
     @action
-    async getProducts() {
+    async getProducts(page: number = 1) {
         this.loading = true;
-        const products = (!this.sizeFilters.length)
-            ? await this.productsApi.getProducts()
-            : await this.productsApi.getProductsBySize(this.sizeFilters)
+
+        const filter = !this.products.length
+            ? this.sizes
+            : this.sizeFilters;
+
+        const result = await this.productsApi.getProductsBySize(filter, page);
         runInAction(() => {
-            this.products = products;
+            this.products = result.products;
+            this.totalRecords = result.total;
             this.loading = false;
         })
     }

@@ -3,6 +3,7 @@ import { ProductsService, IProduct } from '../services/products-service';
 import { CartStore } from "../stores/cart-store";
 import { observer, inject } from "mobx-react";
 import { ProductsStore } from "../stores/products-store";
+import { Paging } from "./Paging";
 
 interface ProductProps {
     productsStore?: ProductsStore;
@@ -15,6 +16,7 @@ export class Products extends React.Component<ProductProps, {}> {
     constructor(props: ProductProps) {
         super(props);
         this.productsStore = this.props.productsStore;
+        this.changePage = this.changePage.bind(this);
     }
 
     async componentDidMount() {
@@ -22,16 +24,19 @@ export class Products extends React.Component<ProductProps, {}> {
     }
 
     render() {
-    return <div className="products">
-        {
-            this.productsStore!.loading && <div className="loader"></div>
-        }
-        {
-            this.productsStore!.products.map(p => {
-                return <ProductItem product={p} key={p.name} />
-            })
-        }
+        return <div className="products">
+            <Paging pageSize={3} totalRecords={this.productsStore!.totalRecords} handleSelection={this.changePage} />
+            { this.productsStore!.loading && <div className="loader"></div> }
+            {
+                this.productsStore!.products.map(p => {
+                    return <ProductItem product={p} key={p.name} />
+                })
+            }
         </div>
+    }
+
+    async changePage(page: number) {
+        await this.productsStore!.getProducts(page);
     }
 }
 
