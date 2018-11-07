@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import { CartStore } from "../stores/cart-store";
 import { observer, inject } from 'mobx-react';
-import { IProduct, CartItem } from "../services/products-service";
+import { IProduct, CartItem } from "../services/products-api";
 import { BagListItemCounter } from "./BagListItemCounter";
 
 interface BagListItemProps {

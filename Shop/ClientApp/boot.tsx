@@ -11,6 +11,16 @@ import cartStore from './stores/cart-store'
 import productsStore from './stores/products-store';
 import { configure } from 'mobx';
 
+
+interface Config {
+    apiUrl: string;
+}
+declare global {
+    interface Window {
+        config: Config;
+    }
+}
+
 const stores = {
     cartStore,
     productsStore

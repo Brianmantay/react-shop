@@ -1,5 +1,5 @@
 ﻿import { observable, action, computed } from 'mobx';
-import { IProduct, CartItem } from "../services/products-service";
+import { IProduct, CartItem } from "../services/products-api";
 
  export class CartStore {
     @observable cartItems: CartItem[] = [];

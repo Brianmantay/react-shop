@@ -1,5 +1,5 @@
 ﻿import { observable, action, computed, runInAction } from 'mobx';
-import { IProduct, ProductsService } from "../services/products-service";
+import { IProduct, ProductsApi } from "../services/products-api";
 
 export class ProductsStore {
     @observable products: IProduct[] = [];
@@ -8,7 +8,7 @@ export class ProductsStore {
     @observable sizes: string[] = ['XS', 'S', 'M', 'L', 'XL'];
     @observable totalRecords: number = 0;
 
-    constructor(private productsApi: ProductsService) {
+    constructor(private productsApi: ProductsApi) {
     }
 
     @action
@@ -49,5 +49,5 @@ export class ProductsStore {
 
 }
 
-const productsStore = new ProductsStore(new ProductsService());
+const productsStore = new ProductsStore(new ProductsApi());
 export default productsStore;

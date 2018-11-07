@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ProductsService, IProduct } from '../services/products-service';
+import { ProductsApi, IProduct } from '../services/products-api';
 import { CartStore } from "../stores/cart-store";
 import { observer, inject } from "mobx-react";
 import { ProductsStore } from "../stores/products-store";
