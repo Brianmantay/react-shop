@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { NavMenu } from './NavMenu';
 import { SizeFilter } from "./SizeFilter";
 import { Bag } from "./Bag";
 import { BagList } from "./BagList";

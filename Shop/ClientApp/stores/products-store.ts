@@ -7,6 +7,7 @@ export class ProductsStore {
     @observable sizeFilters: string[] = [];
     @observable sizes: string[] = ['XS', 'S', 'M', 'L', 'XL'];
     @observable totalRecords: number = 0;
+    pageSize: number = 4;
 
     constructor(private productsApi: ProductsApi) {
     }
@@ -19,7 +20,7 @@ export class ProductsStore {
             ? this.sizes
             : this.sizeFilters;
 
-        const result = await this.productsApi.getProductsBySize(filter, page);
+        const result = await this.productsApi.getProductsBySize(filter, page, this.pageSize);
         runInAction(() => {
             this.products = result.products;
             this.totalRecords = result.total;

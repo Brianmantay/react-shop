@@ -7,13 +7,13 @@ export class ProductsApi {
         return await response.json() as IProduct[];
     }
 
-    public async getProductsBySize(sizeFilters: string[], page: number): Promise<IProductsPaged> {
+    public async getProductsBySize(sizeFilters: string[], page: number, pageSize: number): Promise<IProductsPaged> {
         const response = await fetch(`${window.config.apiUrl}/api/products`, {
             method: 'post',
             body: JSON.stringify({
                 page,
                 sizeFilters,
-                pageSize: 3
+                pageSize
             }),
             headers: [
                 ["Content-Type", "application/json"],

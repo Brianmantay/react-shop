@@ -30,6 +30,34 @@
                 Cost = 85.50M,
                 Description = "A green t-shirt",
                 Size = "XL"
+            },
+            new Product {
+                Name = "Black t-shirt",
+                ImageUrl = "https://cdn.shopify.com/s/files/1/1477/6546/products/GAGA-1-productmocks-blacktee-r8_1024x1024.png?v=1475618736",
+                Cost = 59.00M,
+                Description = "A back t-shirt",
+                Size = "XL"
+            },
+            new Product {
+                Name = "Pink t-shirt",
+                ImageUrl = "https://images-na.ssl-images-amazon.com/images/I/715vzqVPA0L._UX679_.jpg",
+                Cost = 100.00M,
+                Description = "A pink t-shirt",
+                Size = "M"
+            },
+            new Product {
+                Name = "Orange t-shirt",
+                ImageUrl = "https://images-na.ssl-images-amazon.com/images/I/61oQftzjO7L._UX679_.jpg",
+                Cost = 79.50M,
+                Description = "A orange t-shirt",
+                Size = "S"
+            },
+            new Product {
+                Name = "Gray t-shirt",
+                ImageUrl = "https://images-na.ssl-images-amazon.com/images/I/61LkfHymFsL._UX679_.jpg",
+                Cost = 99.50M,
+                Description = "A grey t-shirt",
+                Size = "XL"
             }
         };
 

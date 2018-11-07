@@ -31,7 +31,7 @@ export class Products extends React.Component<ProductProps, {}> {
                     return <ProductItem product={p} key={p.name} />
                 })
             }
-            { this.productsStore!.totalRecords > 0 && <Paging pageSize={3} totalRecords={this.productsStore!.totalRecords} handleSelection={this.changePage} /> }
+            { this.productsStore!.totalRecords > 0 && <Paging pageSize={this.productsStore!.pageSize} totalRecords={this.productsStore!.totalRecords} handleSelection={this.changePage} /> }
         </div>
     }
 
@@ -63,7 +63,7 @@ export class ProductItem extends React.Component<ProductItemProps, {}> {
                 </div>
                 <p className="product-name">{product.name}</p>
                 <hr />
-                <p>{product.description}</p>
+                <p>{product.description} <small>({product.size})</small></p>
                 <div className="cost">
                     <small>$</small>
                     <b>{product.cost.toFixed(2)}</b>
