@@ -25,13 +25,13 @@ export class Products extends React.Component<ProductProps, {}> {
 
     render() {
         return <div className="products">
-            <Paging pageSize={3} totalRecords={this.productsStore!.totalRecords} handleSelection={this.changePage} />
             { this.productsStore!.loading && <div className="loader"></div> }
             {
                 this.productsStore!.products.map(p => {
                     return <ProductItem product={p} key={p.name} />
                 })
             }
+            { this.productsStore!.totalRecords > 0 && <Paging pageSize={3} totalRecords={this.productsStore!.totalRecords} handleSelection={this.changePage} /> }
         </div>
     }
 

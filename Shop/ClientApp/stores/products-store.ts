@@ -15,7 +15,7 @@ export class ProductsStore {
     async getProducts(page: number = 1) {
         this.loading = true;
 
-        const filter = !this.products.length
+        const filter = !this.sizeFilters.length
             ? this.sizes
             : this.sizeFilters;
 

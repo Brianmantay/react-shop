@@ -10,7 +10,8 @@
     "skipDefaultLibCheck": true,
     "strict": true,
     "types": [ "webpack-env" ],
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false
   },
   "exclude": [
     "bin",
